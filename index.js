@@ -176,7 +176,9 @@ function getFastestStarshipName(character) {
 */
 function getLargestCargoStarshipModelName(character) {
   // TODO: Add your code here.
-  return character.starships.sort()
+  return character.starships.sort(function(a,b){
+    return a.cargo_capacity - b.cargo_capacity;
+  })
 }
 
 /**
