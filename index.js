@@ -30,7 +30,7 @@ function getName(character) {
  */
 function getFilmCount(character) {
   // TODO: Add your code inside the functions (others below).
-
+  return character.films.length;
 }
 
 /**
@@ -43,6 +43,11 @@ function getFilmCount(character) {
 */
 function getSecondStarshipName(character) {
   // TODO: Add your code here.
+  if (character.starships[1]) {
+    return character.starships[1].name;
+  } else {
+    return "none";
+  }
 }
 
 /**
@@ -56,6 +61,7 @@ function getSecondStarshipName(character) {
  */
 function getSummary(character) {
   // TODO: Add your code here.
+  return `${character.name}, ${character.height}cm, ${character.mass}kg. Featured in ${character.films.length} films.`;
 }
 
 /**
@@ -68,7 +74,11 @@ function getSummary(character) {
 */
 function getVehiclesCostInCreditsSumTotal(character) {
   // TODO: Add your code here.
+  return character.vehicles.reduce(function (acc, cost){
+    return acc + cost.cost_in_credits;
+  },0)
 }
+
 
 /**
  * ### Challenge `getStarshipPassengerAndCrewSumTotal`
@@ -80,8 +90,12 @@ function getVehiclesCostInCreditsSumTotal(character) {
  *
  * Sample data expected output: 27
 */
-function getStarshipPassengerAndCrewSumTotal(character) {
-  // TODO: Add your code here.
+
+  function getStarshipPassengerAndCrewSumTotal(character) {
+    // TODO: Add your code here.
+    return character.starships.reduce(function (acc, sum) {
+      return acc + (sum.crew + sum.passengers);
+    },0)
 }
 
 /**
@@ -99,6 +113,7 @@ function getStarshipPassengerAndCrewSumTotal(character) {
 */
 function getNthFilm(character, filmNumber) {
   // TODO: Add your code here.
+  return character.films[filmNumber -1]
 }
 
 /**
@@ -113,6 +128,20 @@ function getNthFilm(character, filmNumber) {
 */
 function getCargoCapacityTotal(character) {
   // TODO: Add your code here.
+  
+  const starTotal = character.starships.reduce(function (acc, sum) {
+    if(sum.cargo_capacity === null){
+      sum.cargo_capacity = 0;
+    }
+    return acc + parseFloat(sum.cargo_capacity);
+  },0)
+  const vehTotal = character.vehicles.reduce(function (acc, sum) {
+    if(sum.cargo_capacity === null){
+      sum.cargo_capacity = 0;
+    }
+    return acc + parseFloat(sum.cargo_capacity);
+  },0)
+  return starTotal + vehTotal;
 }
 
 /**
@@ -128,6 +157,10 @@ function getCargoCapacityTotal(character) {
 */
 function getFastestStarshipName(character) {
   // TODO: Add your code here.
+  const sorted = character.starships.sort(function(a, b) {
+    return a.max_atmosphering_speed - b.max_atmosphering_speed;
+  })
+  return sorted;
 }
 
 /**
@@ -143,6 +176,7 @@ function getFastestStarshipName(character) {
 */
 function getLargestCargoStarshipModelName(character) {
   // TODO: Add your code here.
+  return character.starships.sort()
 }
 
 /**
